@@ -29,15 +29,15 @@ function Checkout() {
 
   const user = useSelector(selectLoggedInUser);
   console.log(user);
-  const items = useSelector(selectItems);
+  const cartProducts = useSelector(selectItems);
   const status = useSelector(selectStatus);
   const currentOrder = useSelector(selectCurrentOrder);
 
-  const totalAmount = items.reduce(
+  const totalAmount = cartProducts.reduce(
     (amount, item) => item.price * item.quantity + amount,
     0
   );
-  const totalItems = items.reduce((total, item) => item.quantity + total, 0);
+  const totalItems = cartProducts.reduce((total, item) => item.quantity + total, 0);
 
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
@@ -63,7 +63,7 @@ function Checkout() {
   const handleOrder = (e) => {
     if (selectedAddress && paymentMethod) {
       const order = {
-        items,
+        cartProducts,
         totalAmount,
         totalItems,
         user: user.id,
@@ -81,7 +81,7 @@ function Checkout() {
 
   return (
     <>
-      {!items.length && <Navigate to="/" replace={true}></Navigate>}
+      {!cartProducts.length && <Navigate to="/" replace={true}></Navigate>}
       {currentOrder && currentOrder.paymentMethod === 'cash' && (
         <Navigate
           to={`/order-success/${currentOrder.id}`}
@@ -411,7 +411,7 @@ function Checkout() {
                 </h1>
                 <div className="flow-root">
                   <ul role="list" className="-my-6 divide-y divide-gray-200">
-                    {items.map((item) => (
+                    {cartProducts.map((item) => (
                       <li key={item.id} className="flex py-6">
                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                           <img

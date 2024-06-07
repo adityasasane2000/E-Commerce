@@ -19,8 +19,8 @@ export default function UserOrders() {
     dispatch(fetchLoggedInUserOrderAsync(user.id));
   }, [dispatch]);
 
-  const [address,setAddress] = useState();
-  console.log(address);
+  console.log(orders);
+
   return (
     
     <div>
@@ -87,10 +87,10 @@ export default function UserOrders() {
                   <p>Total Items in Cart</p>
                   <p>{order.totalItems} items</p>
                 </div>
-                <p className="mt-0.5 text-sm text-gray-500">
+                {/* <p className="mt-0.5 text-sm text-gray-500">
                   Shipping Address :
-                </p>
-                <div className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200">
+                </p> */}
+                {/* <div className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200">
                   <div className="flex gap-x-4">
                     <div className="min-w-0 flex-auto">
                       <p className="text-sm font-semibold leading-6 text-gray-900">
@@ -112,7 +112,7 @@ export default function UserOrders() {
                       {order.selectedAddress}
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
