@@ -1085,20 +1085,20 @@
         {
           "name": "Aditya Kale",
           "email": "adityakale50@gmail.com",
-          "phone": "01234567890",
-          "street": "peth",
           "city": "pune",
           "state": "maharshtra",
-          "pincode": "411028"
+          "pinCode": "411028",
+          "phone": "01234567890",
+          "street": "peth"
         },
         {
-          "name": "Rama Swami",
-          "email": "rama@gmail.com",
-          "phone": "01234567890",
-          "street": "manjari",
-          "city": "pune",
-          "state": "maharshtra",
-          "pinCode": "411028"
+          "name": "Ramesh More",
+          "email": "rameshmore34@gmail.com",
+          "phone": "1234567890",
+          "street": "Katraj",
+          "city": "Pune",
+          "state": "Maharashtra",
+          "pinCode": "411037"
         }
       ],
       "id": 1
@@ -1140,11 +1140,35 @@
       "addresses": [],
       "role": "admin",
       "id": 5
+    },
+    {
+      "email": "rama@gmail.com",
+      "password": "123@Rama",
+      "addresses": [
+        {
+          "name": "Rama Swami",
+          "email": "rama@gmail.com",
+          "phone": "01234567890",
+          "street": "manjari",
+          "city": "pune",
+          "state": "maharshtra",
+          "pinCode": "411028"
+        },
+        {
+          "name": "Aditya Kale",
+          "email": "adityasasane50@gmail.com",
+          "phone": "01234567890",
+          "street": "peth",
+          "city": "pune",
+          "state": "maharshtra",
+          "pinCode": "411028"
+        }
+      ],
+      "role": "user",
+      "id": 6
     }
   ],
-  "cart": [
-    
-  ],
+  "cart": [],
   "orders": [
     {
       "cartProducts": [
@@ -1281,6 +1305,236 @@
       },
       "status": "pending",
       "id": 3
+    },
+    {
+      "cartProducts": [
+        {
+          "id": 10,
+          "title": "HP Pavilion 15-DK1056WM",
+          "description": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10",
+          "price": 1099,
+          "discountPercentage": 6.18,
+          "rating": 4.43,
+          "stock": 89,
+          "brand": "HP Pavilion",
+          "category": "laptops",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/10/thumbnail.jpeg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/10/1.jpg",
+            "https://cdn.dummyjson.com/product-images/10/2.jpg",
+            "https://cdn.dummyjson.com/product-images/10/3.jpg",
+            "https://cdn.dummyjson.com/product-images/10/thumbnail.jpeg"
+          ],
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 1099,
+      "totalItems": 1,
+      "user": 1,
+      "paymentMethod": "card",
+      "selectedAddress": {
+        "name": "Rama Swami",
+        "email": "rama@gmail.com",
+        "phone": "01234567890",
+        "street": "manjari",
+        "city": "pune",
+        "state": "maharshtra",
+        "pinCode": "411028"
+      },
+      "status": "pending",
+      "id": 4
+    },
+    {
+      "cartProducts": [
+        {
+          "id": 8,
+          "title": "Microsoft Surface Laptop 4",
+          "description": "Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen.",
+          "price": 1499,
+          "discountPercentage": 10.23,
+          "rating": 4.43,
+          "stock": 68,
+          "brand": "Microsoft Surface",
+          "category": "laptops",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/8/1.jpg",
+            "https://cdn.dummyjson.com/product-images/8/2.jpg",
+            "https://cdn.dummyjson.com/product-images/8/3.jpg",
+            "https://cdn.dummyjson.com/product-images/8/4.jpg",
+            "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+          ],
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 1499,
+      "totalItems": 1,
+      "user": 1,
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Rama Swami",
+        "email": "rama@gmail.com",
+        "phone": "01234567890",
+        "street": "manjari",
+        "city": "pune",
+        "state": "maharshtra",
+        "pinCode": "411028"
+      },
+      "status": "pending",
+      "id": 5
+    },
+    {
+      "cartProducts": [
+        {
+          "id": 2,
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/2/1.jpg",
+            "https://cdn.dummyjson.com/product-images/2/2.jpg",
+            "https://cdn.dummyjson.com/product-images/2/3.jpg",
+            "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg"
+          ],
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 899,
+      "totalItems": 1,
+      "user": 6,
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Rama Swami",
+        "email": "rama@gmail.com",
+        "phone": "01234567890",
+        "street": "manjari",
+        "city": "pune",
+        "state": "maharshtra",
+        "pinCode": "411028"
+      },
+      "status": "pending",
+      "id": 6
+    },
+    {
+      "cartProducts": [
+        {
+          "id": 2,
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/2/1.jpg",
+            "https://cdn.dummyjson.com/product-images/2/2.jpg",
+            "https://cdn.dummyjson.com/product-images/2/3.jpg",
+            "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg"
+          ],
+          "quantity": 2
+        },
+        {
+          "id": 4,
+          "title": "OPPOF19",
+          "description": "OPPO F19 is officially announced on April 2021.",
+          "price": 280,
+          "discountPercentage": 17.91,
+          "rating": 4.3,
+          "stock": 123,
+          "brand": "OPPO",
+          "category": "smartphones",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/4/1.jpg",
+            "https://cdn.dummyjson.com/product-images/4/2.jpg",
+            "https://cdn.dummyjson.com/product-images/4/3.jpg",
+            "https://cdn.dummyjson.com/product-images/4/4.jpg",
+            "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+          ],
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 2078,
+      "totalItems": 3,
+      "user": 1,
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Aditya Kale",
+        "email": "adityasasane50@gmail.com",
+        "phone": "01234567890",
+        "street": "peth",
+        "city": "pune",
+        "state": "maharshtra",
+        "pinCode": "411028"
+      },
+      "status": "pending",
+      "id": 7
+    },
+    {
+      "cartProducts": [
+        {
+          "id": 2,
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/2/1.jpg",
+            "https://cdn.dummyjson.com/product-images/2/2.jpg",
+            "https://cdn.dummyjson.com/product-images/2/3.jpg",
+            "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg"
+          ],
+          "quantity": 1
+        },
+        {
+          "id": 6,
+          "title": "MacBook Pro",
+          "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
+          "price": 1749,
+          "discountPercentage": 11.02,
+          "rating": 4.57,
+          "stock": 83,
+          "brand": "Apple",
+          "category": "laptops",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/6/thumbnail.png",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/6/1.png",
+            "https://cdn.dummyjson.com/product-images/6/2.jpg",
+            "https://cdn.dummyjson.com/product-images/6/3.png",
+            "https://cdn.dummyjson.com/product-images/6/4.jpg"
+          ],
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 2648,
+      "totalItems": 2,
+      "user": 1,
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Aditya Kale",
+        "email": "adityakale50@gmail.com",
+        "city": "pune",
+        "state": "maharshtra",
+        "pinCode": "411028",
+        "phone": "01234567890",
+        "street": "peth"
+      },
+      "status": "pending",
+      "id": 8
     }
   ]
 }

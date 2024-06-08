@@ -19,7 +19,7 @@ export default function UserOrders() {
     dispatch(fetchLoggedInUserOrderAsync(user.id));
   }, [dispatch]);
 
-  console.log(orders);
+  console.log(user);
 
   return (
     
@@ -87,32 +87,32 @@ export default function UserOrders() {
                   <p>Total Items in Cart</p>
                   <p>{order.totalItems} items</p>
                 </div>
-                {/* <p className="mt-0.5 text-sm text-gray-500">
+                <p className="mt-0.5 text-sm text-gray-500">
                   Shipping Address :
-                </p> */}
-                {/* <div className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200">
+                </p> 
+                 <div className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200">
                   <div className="flex gap-x-4">
                     <div className="min-w-0 flex-auto">
                       <p className="text-sm font-semibold leading-6 text-gray-900">
-                        {order.selectedAddress}
+                        {order.selectedAddress.name}
                       </p>
                       <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                        {order.selectedAddress}
+                        {order.selectedAddress.email}
                       </p>
                       <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                        {order.selectedAddress}
+                        {order.selectedAddress.street}
                       </p>
                     </div>
                   </div>
                   <div className="hidden sm:flex sm:flex-col sm:items-end">
                     <p className="text-sm leading-6 text-gray-900">
-                      Phone: {order.selectedAddress}
+                      Phone: {order.selectedAddress.phone}
                     </p>
                     <p className="text-sm leading-6 text-gray-500">
-                      {order.selectedAddress}
+                      {order.selectedAddress.pincode}
                     </p>
                   </div>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
