@@ -16,7 +16,6 @@ import {
 } from '../features/order/orderSlice';
 import { selectUserInfo } from '../features/user/userSlice';
 import { Grid } from 'react-loader-spinner';
-import { selectLoggedInUser } from '../features/auth/authSlice';
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -27,17 +26,16 @@ function Checkout() {
     formState: { errors },
   } = useForm();
 
-  const user = useSelector(selectLoggedInUser);
-  console.log(user);
-  const cartProducts = useSelector(selectItems);
+  const user = useSelector(selectUserInfo);
+  const items = useSelector(selectItems);
   const status = useSelector(selectStatus);
   const currentOrder = useSelector(selectCurrentOrder);
 
-  const totalAmount = cartProducts.reduce(
-    (amount, item) => item.price * item.quantity + amount,
+  const totalAmount = items.reduce(
+    (amount, item) => item.product.discountPrice * item.quantity + amount,
     0
   );
-  const totalItems = cartProducts.reduce((total, item) => item.quantity + total, 0);
+  const totalItems = items.reduce((total, item) => item.quantity + total, 0);
 
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
@@ -63,7 +61,7 @@ function Checkout() {
   const handleOrder = (e) => {
     if (selectedAddress && paymentMethod) {
       const order = {
-        cartProducts,
+        items,
         totalAmount,
         totalItems,
         user: user.id,
@@ -81,7 +79,7 @@ function Checkout() {
 
   return (
     <>
-      {!cartProducts.length && <Navigate to="/" replace={true}></Navigate>}
+      {!items.length && <Navigate to="/" replace={true}></Navigate>}
       {currentOrder && currentOrder.paymentMethod === 'cash' && (
         <Navigate
           to={`/order-success/${currentOrder.id}`}
@@ -411,12 +409,12 @@ function Checkout() {
                 </h1>
                 <div className="flow-root">
                   <ul role="list" className="-my-6 divide-y divide-gray-200">
-                    {cartProducts.map((item) => (
+                    {items.map((item) => (
                       <li key={item.id} className="flex py-6">
                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                           <img
-                            src={item.thumbnail}
-                            alt={item.title}
+                            src={item.product.thumbnail}
+                            alt={item.product.title}
                             className="h-full w-full object-cover object-center"
                           />
                         </div>
@@ -425,16 +423,16 @@ function Checkout() {
                           <div>
                             <div className="flex justify-between text-base font-medium text-gray-900">
                               <h3>
-                                <a href={item.id}>
-                                  {item.title}
+                                <a href={item.product.id}>
+                                  {item.product.title}
                                 </a>
                               </h3>
                               <p className="ml-4">
-                                ${item.price}
+                                ${item.product.discountPrice}
                               </p>
                             </div>
                             <p className="mt-1 text-sm text-gray-500">
-                              {item.brand}
+                              {item.product.brand}
                             </p>
                           </div>
                           <div className="flex flex-1 items-end justify-between text-sm">

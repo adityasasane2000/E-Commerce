@@ -13,7 +13,9 @@ exports.createUser = async (req, res) => {
       32,
       'sha256',
       async function (err, hashedPassword) {
+        console.log(req.body);
         const user = new User({ ...req.body, password: hashedPassword, salt });
+        console.log(user);
         const doc = await user.save();
 
         req.login(sanitizeUser(doc), (err) => {
@@ -31,7 +33,7 @@ exports.createUser = async (req, res) => {
                 httpOnly: true,
               })
               .status(201)
-              .json({ id: doc.id, role: doc.role });
+              .json(token);
           }
         });
       }
@@ -43,6 +45,7 @@ exports.createUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   const user = req.user;
+  // console.log("hi"+user);
   res
     .cookie('jwt', user.token, {
       expires: new Date(Date.now() + 3600000),

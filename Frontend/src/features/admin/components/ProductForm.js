@@ -110,7 +110,7 @@ function ProductForm() {
         noValidate
         onSubmit={handleSubmit((data) => {
           console.log(data);
-          const product = { ...data }; 
+          const product = { ...data };
           product.images = [
             product.image1,
             product.image2,

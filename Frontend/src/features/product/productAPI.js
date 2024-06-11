@@ -22,7 +22,7 @@ export function createProduct(product) {
 export function updateProduct(update) {
   return new Promise(async (resolve) => {
     const response = await fetch(
-      'http://localhost:8080/products/' + update.id,
+      '/products/' + update.id,
       {
         method: 'PATCH',
         body: JSON.stringify(update),
@@ -58,7 +58,7 @@ export function fetchProductsByFilters(filter, sort, pagination, admin) {
 
   return new Promise(async (resolve) => {
     const response = await fetch(
-      'http://localhost:8080/products?' + queryString
+      '/products?' + queryString
     );
     const data = await response.json();
     const totalItems = await response.headers.get('X-Total-Count');

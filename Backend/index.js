@@ -91,14 +91,14 @@ server.use(
 );
 server.use(express.json()); // to parse req.body
 
-server.use('/products', isAuth(), productsRouter.router);
+server.use('/products', isAuth(),productsRouter.router);
 // we can also use JWT token for client-only auth
-server.use('/categories', isAuth(), categoriesRouter.router);
-server.use('/brands', isAuth(), brandsRouter.router);
-server.use('/users', isAuth(), usersRouter.router);
+server.use('/categories', isAuth(),categoriesRouter.router);
+server.use('/brands', isAuth(),brandsRouter.router);
+server.use('/users', isAuth(),usersRouter.router);
 server.use('/auth', authRouter.router);
-server.use('/cart', isAuth(), cartRouter.router);
-server.use('/orders', isAuth(), ordersRouter.router);
+server.use('/cart', isAuth(),cartRouter.router);
+server.use('/orders', isAuth(),ordersRouter.router);
 
 // this line we add to make react router work in case of other routes doesnt match
 server.get('*', (req, res) =>
@@ -116,11 +116,13 @@ passport.use(
     // by default passport uses username
     console.log({ email, password });
     try {
+
       const user = await User.findOne({ email: email });
       console.log(email, password, user);
       if (!user) {
         return done(null, false, { message: 'invalid credentials' }); // for safety
       }
+
       crypto.pbkdf2(
         password,
         user.salt,
@@ -135,7 +137,7 @@ passport.use(
             sanitizeUser(user),
             process.env.JWT_SECRET_KEY
           );
-          done(null, { id: user.id, role: user.role, token }); // this lines sends to serializer
+          done(null, token); // this lines sends to serializer
         }
       );
     } catch (err) {

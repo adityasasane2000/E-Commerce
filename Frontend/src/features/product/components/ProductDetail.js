@@ -30,9 +30,8 @@ export default function ProductDetail() {
   const status = useSelector(selectProductListStatus);
 
   const handleCart = (e) => {
-    console.log(product);
     e.preventDefault();
-    if (items.findIndex((item) => item.id === product.id) < 0) {
+    if (items.findIndex((item) => item.product.id === product.id) < 0) {
       console.log({ items, product });
       const newItem = {
         product: product.id,
@@ -44,7 +43,7 @@ export default function ProductDetail() {
       if (selectedSize) {
         newItem.size = selectedSize;
       }
-      dispatch(addToCartAsync({item:product, alert}));
+      dispatch(addToCartAsync({item:newItem, alert}));
     } else {
       alert.error('Item Already added');
     }
@@ -153,10 +152,10 @@ export default function ProductDetail() {
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <p className="text-xl line-through tracking-tight text-gray-900">
-                ${product.price+500}
+                ${product.price}
               </p>
               <p className="text-3xl tracking-tight text-gray-900">
-                ${product.price}
+                ${product.discountPrice}
               </p>
 
               {/* Reviews */}

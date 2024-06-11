@@ -13,6 +13,11 @@ let transporter = nodemailer.createTransport({
 
 
 exports.isAuth = (req, res, done) => {
+  // if(req.user){
+  //   done();
+  // }else{
+  //   res.send((401)).json("Unauthorized");
+  // }
   return passport.authenticate('jwt');
 };
 
