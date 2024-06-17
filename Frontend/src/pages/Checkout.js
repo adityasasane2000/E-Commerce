@@ -16,6 +16,7 @@ import {
 } from '../features/order/orderSlice';
 import { selectUserInfo } from '../features/user/userSlice';
 import { Grid } from 'react-loader-spinner';
+import { selectLoggedInUser } from '../features/auth/authSlice';
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -27,15 +28,16 @@ function Checkout() {
   } = useForm();
 
   const user = useSelector(selectUserInfo);
-  const items = useSelector(selectItems);
+  // console.log(user);
+  const cartProducts = useSelector(selectItems);
   const status = useSelector(selectStatus);
   const currentOrder = useSelector(selectCurrentOrder);
 
-  const totalAmount = items.reduce(
-    (amount, item) => item.product.discountPrice * item.quantity + amount,
+  const totalAmount = cartProducts.reduce(
+    (amount, item) => item.product.price * item.quantity + amount,
     0
   );
-  const totalItems = items.reduce((total, item) => item.quantity + total, 0);
+  const totalItems = cartProducts.reduce((total, item) => item.quantity + total, 0);
 
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
@@ -61,7 +63,7 @@ function Checkout() {
   const handleOrder = (e) => {
     if (selectedAddress && paymentMethod) {
       const order = {
-        items,
+        cartProducts,
         totalAmount,
         totalItems,
         user: user.id,
@@ -72,23 +74,22 @@ function Checkout() {
       dispatch(createOrderAsync(order));
       // need to redirect from here to a new page of order success.
     } else {
-      
       alert('Enter Address and Payment method');
     }
   };
 
   return (
     <>
-      {!items.length && <Navigate to="/" replace={true}></Navigate>}
+      {!cartProducts.length && <Navigate to="/" replace={true}></Navigate>}
       {currentOrder && currentOrder.paymentMethod === 'cash' && (
         <Navigate
           to={`/order-success/${currentOrder.id}`}
           replace={true}
         ></Navigate>
       )}
-      {currentOrder && currentOrder.paymentMethod === 'card' && (
+      {/* {currentOrder && currentOrder.paymentMethod === 'card' && (
         <Navigate to={`/stripe-checkout/`} replace={true}></Navigate>
-      )}
+      )} */}
 
       {status === 'loading' ? (
         <Grid
@@ -409,7 +410,7 @@ function Checkout() {
                 </h1>
                 <div className="flow-root">
                   <ul role="list" className="-my-6 divide-y divide-gray-200">
-                    {items.map((item) => (
+                    {cartProducts.map((item) => (
                       <li key={item.id} className="flex py-6">
                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                           <img
@@ -428,7 +429,7 @@ function Checkout() {
                                 </a>
                               </h3>
                               <p className="ml-4">
-                                ${item.product.discountPrice}
+                                ${item.product.price}
                               </p>
                             </div>
                             <p className="mt-1 text-sm text-gray-500">

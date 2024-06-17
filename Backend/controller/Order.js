@@ -5,9 +5,9 @@ const { sendMail, invoiceTemplate } = require("../services/common");
 
 exports.fetchOrdersByUser = async (req, res) => {
     const { id } = req.user;
+
     try {
       const orders = await Order.find({ user: id });
-  
       res.status(200).json(orders);
     } catch (err) {
       res.status(400).json(err);
@@ -16,21 +16,23 @@ exports.fetchOrdersByUser = async (req, res) => {
   
   exports.createOrder = async (req, res) => {
     const order = new Order(req.body);
-    // here we have to update stocks;
+    console.log("order"+order);
     
-    for(let item of order.items){
+    for(let item of order.cartProducts){
+      // console.log(item);
        let product =  await Product.findOne({_id:item.product.id})
+      //  console.log(item);
        product.$inc('stock',-1*item.quantity);
-       // for optimum performance we should make inventory outside of product.
        await product.save()
     }
 
     try {
       const doc = await order.save();
-      const user = await User.findById(order.user)
-       // we can use await for this also 
-       sendMail({to:user.email,html:invoiceTemplate(order),subject:'Order Received' })
-             
+      
+      const user = await User.findById(order.user);
+      console.log(user.email);
+      sendMail({to:user.email,html:invoiceTemplate(order),subject:'Order Received' });
+
       res.status(201).json(doc);
     } catch (err) {
       res.status(400).json(err);

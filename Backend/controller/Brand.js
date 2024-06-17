@@ -1,7 +1,7 @@
 const { Brand } = require('../model/Brand');
 
 exports.fetchBrands = async (req, res) => {
-  console.log("hi");
+  // console.log("hello!!");
   try {
     const brands = await Brand.find({}).exec();
     res.status(200).json(brands);

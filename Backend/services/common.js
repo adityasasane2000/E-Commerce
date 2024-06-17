@@ -6,18 +6,13 @@ let transporter = nodemailer.createTransport({
   port: 587,
   secure: false, // true for 465, false for other ports
   auth: {
-    user: 'coderdost@gmail.com', // gmail
+    user: 'adityasasane555@gmail.com', // gmail
     pass: process.env.MAIL_PASSWORD, // pass
   },
 });
 
 
 exports.isAuth = (req, res, done) => {
-  // if(req.user){
-  //   done();
-  // }else{
-  //   res.send((401)).json("Unauthorized");
-  // }
   return passport.authenticate('jwt');
 };
 
@@ -30,13 +25,15 @@ exports.cookieExtractor = function (req) {
   if (req && req.cookies) {
     token = req.cookies['jwt'];
   }
+
+  // token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Njk4NGJiN2YyYTQ2Mzg0ZjE3YjM0YiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzE4MTkxMjkxfQ.cOaKXDRHVaarr6xiyV0KFfK7VQSzupjtUobDlYdkuaE"
   return token;
 };
 
 
 exports.sendMail = async function ({to, subject, text, html}){
     let info = await transporter.sendMail({
-        from: '"E-commerce" <coderdost@gmail.com>', // sender address
+        from: '"E-commerce" <adityasasane555@gmail.com>', 
         to,
         subject,
         text,
@@ -46,7 +43,7 @@ exports.sendMail = async function ({to, subject, text, html}){
 }
 
 exports.invoiceTemplate = function(order){
-
+console.log(order);
  return (`<!DOCTYPE html>
 <html>
 <head>
@@ -174,7 +171,7 @@ exports.invoiceTemplate = function(order){
           <tr>
             <td align="center" valign="top" style="padding: 36px 24px;">
               <a href="https://sendgrid.com" target="_blank" style="display: inline-block;">
-                <img src="./img/paste-logo-light@2x.png" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
+                <img src="https://images.app.goo.gl/TEtMCDcNUXwJqYZ7A" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
               </a>
             </td>
           </tr>
@@ -239,7 +236,7 @@ exports.invoiceTemplate = function(order){
                   <td align="left" bgcolor="#D2C7BA" width="20%" style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;"><strong></strong></td>
                   <td align="left" bgcolor="#D2C7BA" width="20%" style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;"><strong>${order.id}</strong></td>
                 </tr>
-                ${order.items.map(item=>`<tr>
+                ${order.cartProducts.map(item=>`<tr>
                   <td align="left" width="60%" style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">${item.product.title}</td>
                   <td align="left" width="20%" style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">${item.quantity}</td>
                   <td align="left" width="20%" style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">$${Math.round(item.product.price*(1-item.product.discountPercentage/100),2)}</td>

@@ -23,6 +23,7 @@ export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState();
   const [selectedSize, setSelectedSize] = useState();
   const items = useSelector(selectItems);
+  const user = useSelector(selectLoggedInUser);
   const product = useSelector(selectProductById);
   const dispatch = useDispatch();
   const params = useParams();
@@ -30,20 +31,25 @@ export default function ProductDetail() {
   const status = useSelector(selectProductListStatus);
 
   const handleCart = (e) => {
+    // console.log(product);
     e.preventDefault();
+    console.log(items);
+
     if (items.findIndex((item) => item.product.id === product.id) < 0) {
       console.log({ items, product });
       const newItem = {
         product: product.id,
         quantity: 1,
+        user:user.id
       };
+
       if (selectedColor) {
         newItem.color = selectedColor;
       }
       if (selectedSize) {
         newItem.size = selectedSize;
       }
-      dispatch(addToCartAsync({item:newItem, alert}));
+      dispatch(addToCartAsync({item:product, alert}));
     } else {
       alert.error('Item Already added');
     }
@@ -152,10 +158,10 @@ export default function ProductDetail() {
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <p className="text-xl line-through tracking-tight text-gray-900">
-                ${product.price}
+                ${product.price+500}
               </p>
               <p className="text-3xl tracking-tight text-gray-900">
-                ${product.discountPrice}
+                ${product.price}
               </p>
 
               {/* Reviews */}

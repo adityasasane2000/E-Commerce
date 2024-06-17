@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   deleteItemFromCartAsync,
@@ -14,26 +14,48 @@ import Modal from '../common/Modal';
 
 export default function Cart() {
   const dispatch = useDispatch();
-
   const items = useSelector(selectItems);
+  // console.log(items);
   const status = useSelector(selectCartStatus);
   const cartLoaded = useSelector(selectCartLoaded)
   const [openModal, setOpenModal] = useState(null);
 
-  const totalAmount = items.reduce(
-    (amount, item) => item.product.discountPrice * item.quantity + amount,
+  var totalAmount = items.reduce(
+    (amount, item) => item.product.price * item.quantity + amount,
     0
   );
-  const totalItems = items.reduce((total, item) => item.quantity + total, 0);
+  var totalItems = items.reduce((total, item) => item.quantity + total, 0);
+
+  useEffect(() => {
+    totalAmount = items.reduce(
+      (amount, item) => item.product.price * item.quantity + amount,
+      0
+    );
+
+    totalItems = items.reduce((total, item) => item.quantity + total, 0);
+  },[items]);
+
+  const changeAmount = () =>{
+    totalAmount = items.reduce(
+      (amount, item) => item.product.price * item.quantity + amount,
+      0
+    );
+
+    totalItems = items.reduce((total, item) => item.quantity + total, 0);
+  }
+
 
   const handleQuantity = (e, item) => {
     dispatch(updateCartAsync({id:item.id, quantity: +e.target.value }));
+    changeAmount();
   };
 
   const handleRemove = (e, id) => {
     dispatch(deleteItemFromCartAsync(id));
+    changeAmount();
   };
 
+  // console.log(items);
   return (
     <>
       {!items.length && cartLoaded && <Navigate to="/" replace={true}></Navigate>}
@@ -72,9 +94,9 @@ export default function Cart() {
                       <div>
                         <div className="flex justify-between text-base font-medium text-gray-900">
                           <h3>
-                            <a href={item.product.id}>{item.product.title}</a>
+                            <a href={item.id}>{item.product.title}</a>
                           </h3>
-                          <p className="ml-4">${item.product.discountPrice}</p>
+                          <p className="ml-4">${item.product.price}</p>
                         </div>
                         <p className="mt-1 text-sm text-gray-500">
                           {item.product.brand}
@@ -106,12 +128,12 @@ export default function Cart() {
                             message="Are you sure you want to delete this Cart item ?"
                             dangerOption="Delete"
                             cancelOption="Cancel"
-                            dangerAction={(e) => handleRemove(e, item.id)}
+                            dangerAction={(e) => handleRemove(e, item.product.id)}
                             cancelAction={()=>setOpenModal(null)}
-                            showModal={openModal === item.id}
+                            showModal={openModal === item.product.id}
                           ></Modal>
                           <button
-                            onClick={e=>{setOpenModal(item.id)}}
+                            onClick={e=>{setOpenModal(item.product.id)}}
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                           >
